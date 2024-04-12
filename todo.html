@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do app</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container{
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h1{
+            text-align: center;
+        }
+        input[type='text']{
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button{
+            padding: 10px 20px;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #45a049;
+        }
+        ul{
+            list-style: none;
+            padding: 0;
+        }
+        li{
+            margin-bottom: 5px;
+        }
+       .checked{
+            text-decoration: line-through;
+        }
+        .close{
+            float: right;
+            cursor: pointer;
+        }
+        .close:hover{
+            color: red;
+        }
+        li:nth-child(odd){
+            background-color: #ccc;
+            padding: 10px;
+        }
+        li:nth-child(even){
+            background-color: #6b6b6b;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To Do App</h1>
+        <input type="text" id="taskInput" placeholder="add new task">
+        <button onclick="addTask()">add task</button>
+        <ul id="taskList">
+            <!-- tasks will be added dynamically here -->
+        </ul>
+    </div>
+    <script>
+
+        function addTask() {
+            const input = document.getElementById('taskInput').value;
+            if (input === ''){
+                alert('you must add a task!')
+            }else{
+                const ul = document.getElementById('taskList');
+                const li = document.createElement('li');
+                li.appendChild(document.createTextNode(input));
+                
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.value = li
+                checkbox.onclick = function(){
+                    li.classList.toggle("checked");
+                };
+                li.appendChild(checkbox)
+
+                const closeBtn = document.createElement("span");
+                closeBtn.className = "close";
+                closeBtn.innerHTML = "x";
+                closeBtn.onclick = function(){
+                    var div = this.parentElement;
+                    div.style.display = "none"
+                };
+                li.appendChild(closeBtn)
+                ul.appendChild(li);
+
+                document.getElementById("taskInput").value = "";
+            }
+        }
+
+
+
+    </script>
+    
+</body>
+</html>
